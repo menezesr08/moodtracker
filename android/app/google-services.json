@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "804461574585",
+    "project_id": "moodtrackerflutter",
+    "storage_bucket": "moodtrackerflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:804461574585:android:ba22e75474d92f9c7ade68",
+        "android_client_info": {
+          "package_name": "com.example.how_are_you"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "804461574585-dnmmgt6bn44qb1cuu9j3sg120jsg8pie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnH3G2Zn41BcsEeiFEb6aa87VnrmnuCT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "804461574585-dnmmgt6bn44qb1cuu9j3sg120jsg8pie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
