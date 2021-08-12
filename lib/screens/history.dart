@@ -17,9 +17,9 @@ class _HistoryState extends State<History> {
   // Retrieve data from firebase based on user id.
   Future<dynamic> getData() async {
     FirebaseFirestore.instance
-        .collection('emojis')
+        .collection('userData')
         .doc(user!.uid)
-        .collection("list")
+        .collection("mood")
         .orderBy("timestamp")
         .get()
         .then((QuerySnapshot querySnapshot) {
