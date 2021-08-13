@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     // StreamProvider listens to our AuthService stream for firebase auth changes.
     // Stream provider then passes these changes to the wrapper widget.
     return StreamProvider<StandardUser?>.value(
-      catchError: (_,__) => null,
+      catchError: (_, __) => null,
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(

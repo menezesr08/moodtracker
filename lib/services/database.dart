@@ -1,35 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:how_are_you/models/emoji.dart';
+import 'package:how_are_you/models/mood.dart';
 import 'package:intl/intl.dart';
 
 class DataBaseService {
   final String? uid;
-  final CollectionReference emojisCollection =
+  final CollectionReference userDataCollection =
       FirebaseFirestore.instance.collection("userData");
 
   DataBaseService({this.uid});
 
-  Future addItem(Emoji emoji) async {
-    Map<String, dynamic> currentEmoji = <String, dynamic>{
-      "text": emoji.text,
-      "assetPath": emoji.assetPath,
+  Future addItem(Mood mood) async {
+    Map<String, dynamic> currentMood = <String, dynamic>{
+      "text": mood.text,
+      "assetPath": mood.assetPath,
       "timestamp": convertEpochToString(DateTime.now().millisecondsSinceEpoch)
     };
 
-    return emojisCollection.doc(uid).collection("mood").add(currentEmoji);
+    return userDataCollection.doc(uid).collection("mood").add(currentMood);
   }
 
-  Future<void> deleteItem({required String docId})  {
-    return emojisCollection.doc(uid).collection('mood').doc(docId).delete();
+  Future<void> deleteItem({required String docId}) {
+    return userDataCollection.doc(uid).collection('mood').doc(docId).delete();
   }
 
-  Future<void> updateItem({ required Emoji emoji, required String docId, required String timestamp})  {
-    Map<String, dynamic> data = <String, dynamic>{
-      "text": emoji.text,
-      "assetPath": emoji.assetPath,
+  Future<void> updateItem(
+      {required Mood mood, required String docId, required String timestamp}) {
+    Map<String, dynamic> newMood = <String, dynamic>{
+      "text": mood.text,
+      "assetPath": mood.assetPath,
       "timestamp": timestamp
     };
-    return emojisCollection.doc(uid).collection('mood').doc(docId).update(data);
+    return userDataCollection
+        .doc(uid)
+        .collection('mood')
+        .doc(docId)
+        .update(newMood);
   }
 
   // converts a given timestamp to string format
@@ -37,5 +42,4 @@ class DataBaseService {
     var dt = DateTime.fromMillisecondsSinceEpoch(timestamp);
     return DateFormat('dd/MM/yyyy, HH:mm').format(dt);
   }
-
 }

@@ -1,12 +1,12 @@
 // Object which defines each row in the listview
-class EmojiRow {
+class DbMood {
   String text;
   String assetPath;
   String timestamp;
   String id;
 
   // id - id returned from Firebase
-  EmojiRow(
+  DbMood(
       {required this.id,
       required this.text,
       required this.assetPath,
