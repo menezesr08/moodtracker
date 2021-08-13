@@ -27,7 +27,6 @@ class BuildEmoji extends StatelessWidget {
 
   Future addToFirebase() async {
     final user = FirebaseAuth.instance.currentUser;
-    print(user!.uid);
-    await DataBaseService(uid: user.uid).addItem(emoji);
+    await DataBaseService(uid: user!.uid).addItem(emoji);
   }
 }

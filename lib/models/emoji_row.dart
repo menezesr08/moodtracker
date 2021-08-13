@@ -2,7 +2,7 @@
 class EmojiRow {
   String text;
   String assetPath;
-  var timestamp;
+  String timestamp;
   String id;
 
   // id - id returned from Firebase

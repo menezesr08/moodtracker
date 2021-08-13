@@ -54,25 +54,25 @@ class MyHomePage extends StatelessWidget {
                     ),
                     Container(
                         child: BuildEmoji(new Emoji(
-                            text: "great", assetPath: 'assets/great.png'))),
+                            text: "Great", assetPath: 'assets/great.png'))),
                     Container(
                         child: BuildEmoji(new Emoji(
-                      text: "good",
+                      text: "Good",
                       assetPath: 'assets/good.png',
                     ))),
                     Container(
                         child: BuildEmoji(new Emoji(
-                      text: "ok",
+                      text: "Ok",
                       assetPath: 'assets/ok.png',
                     ))),
                     Container(
                         child: BuildEmoji(new Emoji(
-                      text: "bad",
+                      text: "Bad",
                       assetPath: 'assets/bad.png',
                     ))),
                     Container(
                         child: BuildEmoji(new Emoji(
-                      text: "awful",
+                      text: "Awful",
                       assetPath: 'assets/awful.png',
                     ))),
                   ],
