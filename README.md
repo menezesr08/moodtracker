@@ -7,4 +7,3 @@ A simple Flutter app to track your mood.
 
 # Sources
 Used login screen from: https://github.com/ahmed-alzahrani/Flutter_Simple_Login
-Author: ahmed-alzahrani
