@@ -1,4 +1,4 @@
-# how_are_you
+# MoodTracker
 A simple Flutter app to track your mood.
 
 # Features
