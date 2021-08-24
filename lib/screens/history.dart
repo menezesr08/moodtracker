@@ -107,7 +107,7 @@ class _HistoryState extends State<History> {
                                     width: 30, height: 30))
                           ];
                         },
-                        // updates result on firebase and the listview
+                        // updates firebase when user updates mood
                         onSelected: (Mood moodSelected) =>
                             _databaseService.updateItem(mood: moodSelected,
                                 docId: dbMoods[index].id,
