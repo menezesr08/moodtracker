@@ -25,7 +25,8 @@ class _HistoryState extends State<History> {
     currentUserMoodRef = FirebaseFirestore.instance
         .collection('userData')
         .doc(currentUser!.uid)
-        .collection("mood").orderBy("timestamp")
+        .collection("mood")
+        .orderBy("timestamp")
         .snapshots();
   }
 
@@ -70,7 +71,7 @@ class _HistoryState extends State<History> {
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(dbMoods[index].timestamp,
                           style:
-                          TextStyle(fontSize: 18, color: Colors.grey[600])),
+                              TextStyle(fontSize: 18, color: Colors.grey[600])),
                     ),
                     trailing: PopupMenuButton(
                         icon: Icon(Icons.more_vert),
@@ -90,7 +91,7 @@ class _HistoryState extends State<History> {
                             ),
                             PopupMenuItem(
                               value:
-                              Mood(text: "Ok", assetPath: 'assets/ok.png'),
+                                  Mood(text: "Ok", assetPath: 'assets/ok.png'),
                               child: Image.asset('assets/ok.png',
                                   width: 30, height: 30),
                             ),
@@ -109,7 +110,8 @@ class _HistoryState extends State<History> {
                         },
                         // updates firebase when user updates mood
                         onSelected: (Mood moodSelected) =>
-                            _databaseService.updateItem(mood: moodSelected,
+                            _databaseService.updateItem(
+                                mood: moodSelected,
                                 docId: dbMoods[index].id,
                                 timestamp: dbMoods[index].timestamp)),
                   ),
