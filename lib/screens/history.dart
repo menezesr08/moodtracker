@@ -30,46 +30,104 @@ class _HistoryState extends State<History> {
         .snapshots();
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   final _databaseService = DataBaseService(uid: currentUser!.uid);
+  //   return HistoryListview(currentUserMoodRef: currentUserMoodRef, dbMoods: dbMoods, databaseService: _databaseService);
+  // }
   @override
   Widget build(BuildContext context) {
     final _databaseService = DataBaseService(uid: currentUser!.uid);
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+            body:
+            Column(
+              children: <Widget>[
+                ColoredBox(
+                  color:  Colors.red,
+                  child: TabBar(
+                    tabs: [
+                      Tab(icon: Icon(Icons.list), text: 'List'),
+                      Tab(icon: Icon(Icons.auto_graph), text: 'Graph')
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: TabBarView(
+                    children: [
+                      HistoryListview(currentUserMoodRef: currentUserMoodRef, dbMoods: dbMoods, databaseService: _databaseService),
+                      HistoryGraph()
+                    ],
+                  ),
+                )
+              ],
+            )
+
+        ),
+      ),
+    );
+  }
+}
+
+class HistoryListview extends StatefulWidget {
+  const HistoryListview({
+    Key? key,
+    required this.currentUserMoodRef,
+    required this.dbMoods,
+    required DataBaseService databaseService,
+  }) : _databaseService = databaseService, super(key: key);
+
+  final currentUserMoodRef;
+  final List<DbMood> dbMoods;
+  final DataBaseService _databaseService;
+
+  @override
+  _HistoryListviewState createState() => _HistoryListviewState();
+}
+
+class _HistoryListviewState extends State<HistoryListview> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       // listens to the current users data and checks automatically for any updates
       body: StreamBuilder(
-        stream: currentUserMoodRef,
+        stream: widget.currentUserMoodRef,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) return new Text('Loading...');
-          dbMoods.clear();
+          widget.dbMoods.clear();
           snapshot.data!.docs.forEach((QueryDocumentSnapshot doc) {
-            dbMoods.add(DbMood(
+            widget.dbMoods.add(DbMood(
                 id: doc.id,
                 text: doc.get("text"),
                 assetPath: doc.get("assetPath"),
                 timestamp: doc.get("timestamp")));
           });
           return ListView.builder(
-            itemCount: dbMoods.length,
+            itemCount: widget.dbMoods.length,
             itemBuilder: (context, index) {
               // Allows deleting an item from listview and from firebase.
               return Dismissible(
                 key: UniqueKey(),
                 onDismissed: (direction) {
-                  _databaseService.deleteItem(docId: dbMoods[index].id);
-                  dbMoods.removeAt(index);
+                  widget._databaseService.deleteItem(docId: widget.dbMoods[index].id);
+                  widget.dbMoods.removeAt(index);
                 },
                 // Builds listview
                 child: Card(
                   margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
                   child: ListTile(
-                    leading: Image.asset(dbMoods[index].assetPath),
-                    title: Text(dbMoods[index].text,
+                    leading: Image.asset(widget.dbMoods[index].assetPath),
+                    title: Text(widget.dbMoods[index].text,
                         style: TextStyle(
                             fontSize: 20,
                             color: Colors.grey[600],
                             fontWeight: FontWeight.bold)),
                     subtitle: Padding(
                       padding: const EdgeInsets.only(top: 10),
-                      child: Text(dbMoods[index].timestamp,
+                      child: Text(widget.dbMoods[index].timestamp,
                           style:
                               TextStyle(fontSize: 18, color: Colors.grey[600])),
                     ),
@@ -110,10 +168,10 @@ class _HistoryState extends State<History> {
                         },
                         // updates firebase when user updates mood
                         onSelected: (Mood moodSelected) =>
-                            _databaseService.updateItem(
+                            widget._databaseService.updateItem(
                                 mood: moodSelected,
-                                docId: dbMoods[index].id,
-                                timestamp: dbMoods[index].timestamp)),
+                                docId: widget.dbMoods[index].id,
+                                timestamp: widget.dbMoods[index].timestamp)),
                   ),
                 ),
               );
@@ -124,3 +182,18 @@ class _HistoryState extends State<History> {
     );
   }
 }
+
+class HistoryGraph extends StatefulWidget {
+  @override
+  _HistoryGraphState createState() => _HistoryGraphState();
+}
+
+class _HistoryGraphState extends State<HistoryGraph> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Text("Graph")
+    );
+  }
+}
+
