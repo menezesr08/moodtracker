@@ -13,7 +13,8 @@ class DataBaseService {
     Map<String, dynamic> currentMood = <String, dynamic>{
       "text": mood.text,
       "assetPath": mood.assetPath,
-      "timestamp": convertEpochToString(DateTime.now().millisecondsSinceEpoch)
+      "timestamp": FieldValue.serverTimestamp(),
+      "type": mood.type
     };
 
     return userDataCollection.doc(uid).collection("mood").add(currentMood);
@@ -24,7 +25,7 @@ class DataBaseService {
   }
 
   Future<void> updateItem(
-      {required Mood mood, required String docId, required String timestamp}) {
+      {required Mood mood, required String docId, required Timestamp timestamp}) {
     Map<String, dynamic> newMood = <String, dynamic>{
       "text": mood.text,
       "assetPath": mood.assetPath,

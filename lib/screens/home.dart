@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: Text("Mood Tracker"),
           centerTitle: true,
-          backgroundColor: Colors.red[500],
+          backgroundColor: Colors.brown.shade900,
           actions: <Widget>[
             TextButton.icon(
                 onPressed: () async {
