@@ -43,7 +43,7 @@ class _HistoryState extends State<History> {
             body: Column(
               children: <Widget>[
                 ColoredBox(
-                  color: Colors.red.shade500,
+                  color: Colors.redAccent,
                   child: TabBar(
                     tabs: [
                       Tab(icon: Icon(Icons.list), text: 'List'),
@@ -202,7 +202,7 @@ class _HistoryListviewState extends State<HistoryListview> {
     return DateFormat.yMMMd().add_jm().format(date);
   }
 }
-
+// Todo: Y axis needs images as ticks to represent moods. Can't find the functionality in any graphs library
 class PointsLineChart extends StatefulWidget {
   final bool animate;
   final List<DbMood> dbMoods;
@@ -231,6 +231,11 @@ class _PointsLineChartState extends State<PointsLineChart> {
                 child: SfCartesianChart(
                   // Initialize category axis
                     primaryXAxis: CategoryAxis(),
+                    primaryYAxis: NumericAxis(
+                        minimum: -1,
+                        maximum: 5,
+                        interval: 1
+                    ),
                     legend: Legend(
                         isVisible: true,
                         overflowMode: LegendItemOverflowMode.wrap,

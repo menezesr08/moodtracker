@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:how_are_you/screens/history.dart';
 import 'package:how_are_you/screens/select_mood.dart';
@@ -19,7 +21,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: Text("Mood Tracker"),
           centerTitle: true,
-          backgroundColor: Colors.brown.shade900,
+          backgroundColor: Colors.red,
           actions: <Widget>[
             TextButton.icon(
                 onPressed: () async {
@@ -31,7 +33,10 @@ class _HomeState extends State<Home> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.blue[900],
+          selectedFontSize: 20,
+          selectedIconTheme: IconThemeData(color: Colors.black, size: 20),
+          selectedItemColor: Colors.black,
+          backgroundColor: Colors.redAccent,
           onTap: onTabTapped,
           currentIndex: _currentIndex,
           items: [
