@@ -9,5 +9,6 @@ A simple Flutter app to track your mood.
 # Sources
 Used login screen from: https://github.com/yogitakumar/logindemo
 
-# Have a look at the app
+
+# Have a look at the app :)
 ![](20210909_091907.gif)
